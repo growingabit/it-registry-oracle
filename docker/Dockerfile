@@ -8,6 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y wget
 RUN apt-get install -y unzip
 RUN apt-get install -y git
+RUN apt-get install -y jq
 RUN apt-get install -y zip
 WORKDIR /opt
 
