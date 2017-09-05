@@ -12,9 +12,9 @@ RUN apt-get install -y jq
 RUN apt-get install -y zip
 WORKDIR /opt
 
-RUN wget https://storage.googleapis.com/growingabit-io-backend/jdk-7u80-linux-x64.tar.gz
-RUN tar -xzf jdk-7u80-linux-x64.tar.gz
-ENV JAVA_HOME="/opt/jdk1.7.0_80"
+RUN wget https://storage.googleapis.com/growingabit-io-backend/jdk-8u144-linux-x64.tar.gz
+RUN tar -xzf jdk-8u144-linux-x64.tar.gz
+ENV JAVA_HOME="/opt/jdk1.8.0_144"
 
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
