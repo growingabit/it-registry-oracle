@@ -16,7 +16,7 @@ before_install:
   - sudo chmod o+x /usr/local/bin/ipfs
   - ipfs init
   - ipfs daemon &
-  - rm -R go-ipfs.tar.gz go-ipfs .git
+  - rm -Rf go-ipfs.tar.gz go-ipfs .git
   - sleep 10
 
 
