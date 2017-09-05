@@ -26,6 +26,7 @@ before_install:
 
 script:
   - docker build -t growbit/it-registry-oracle .
+  - docker run growbit/it-registry-oracle
 
 after_success:
   - zip -r archive.zip .
