@@ -32,7 +32,7 @@ RUN echo $PATH
 
 RUN mvn -v
 
-ADD ../spring-boot-app /opt/spring-boot-app
+ADD spring-boot-app /opt/spring-boot-app
 
 WORKDIR /opt/spring-boot-app
 
