@@ -1,0 +1,7 @@
+Si puo' recuperare l'ultimo hash ipfs per poi passarlo come computational accedendo ai log di travis
+
+https://docs.travis-ci.com/api/#builds
+
+builds > jobs > logs
+
+cosi non possiamo barare su quale contratto eseguire
