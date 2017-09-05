@@ -23,6 +23,6 @@ before_install:
 script:
   - docker build -t growbit/it-registry-oracle .
 
-after_script:
+after_success:
   - zip -r archive.zip .
   - ipfs add -Q archive.zip
