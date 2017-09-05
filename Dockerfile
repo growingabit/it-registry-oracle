@@ -10,6 +10,7 @@ RUN apt-get install -y unzip
 RUN apt-get install -y git
 RUN apt-get install -y jq
 RUN apt-get install -y zip
+RUN apt-get install -y curl
 WORKDIR /opt
 
 RUN wget https://storage.googleapis.com/growingabit-io-backend/jdk-8u144-linux-x64.tar.gz
@@ -46,4 +47,4 @@ ADD cmd.sh cmd.sh
 
 RUN chmod +x cmd.sh
 
-CMD cmd.sh
+CMD /opt/cmd.sh
