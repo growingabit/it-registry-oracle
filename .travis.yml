@@ -17,7 +17,7 @@ before_install:
   - ipfs init
   - openssl aes-256-cbc -K $encrypted_170687699e24_key -iv $encrypted_170687699e24_iv -in id_ipfs.enc -out id_ipfs -d
   - export ID_IPFS=`cat id_ipfs`
-  - rm id_ipfs
+  - rm id_ipfs*
   - cat ~/.ipfs/config | jq '.Identity.PrivKey=env.ID_IPFS' | sponge ~/.ipfs/config
   - ipfs config Identity.PeerID 'QmVfo4FQYdodmR9KWVCjjb1XgaVogsipwGzMLhPF3yyqBY'
   - ipfs daemon &
