@@ -1,7 +1,7 @@
 curl 'https://api.oraclize.it/api/v1/query/create' -H 'origin: http://app.oraclize.it' -H 'dnt: 1' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: it-IT,it;q=0.8,en-US;q=0.6,en;q=0.4' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36' -H 'content-type: application/json; charset=UTF-8' -H 'pragma: no-cache' -H 'accept: application/json, text/javascript, */*; q=0.01' -H 'cache-control: no-cache' -H 'authority: api.oraclize.it' -H 'referer: http://app.oraclize.it/home/test_query' --data-binary '{"datasource":"computation","query":"QmS4g2eyriLdF8fZC8bboDUoDkRNVcDoizySN9VnKhtpXF"}' --compressed
 
-# versione semplificata no browser
-curl 'https://api.oraclize.it/api/v1/query/create' -H 'content-type: application/json' -H 'accept: application/json' --data-binary '{"datasource":"computation","query":""}'
+# versione semplificata no browser con TLSNotary
+curl 'https://api.oraclize.it/api/v1/query/create' -H 'content-type: application/json' -H 'accept: application/json' --data-binary '{"datasource":"computation","query":"", proof_type:17}'
 
 
 {"result": {"_timestamp": 1504653585, "daterange": [1504653585, 1504653645], "interval": 3600, "actions": [], "id": "8ec431ce20dbdab8b3d32e588f8c17d7189eedc2f575872ce9b6bd72eb972d20", "version": 3, "_timestamp_creation": 1504653585, "active": true, "hidden": false, "payload": {"conditions": [{"query": "QmS4g2eyriLdF8fZC8bboDUoDkRNVcDoizySN9VnKhtpXF", "proof_type": 0, "check_op": "tautology", "datasource": "computation", "value": null}]}}, "success": true}
