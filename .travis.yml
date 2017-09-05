@@ -25,4 +25,4 @@ script:
 
 after_script:
   - zip -r archive.zip .
-  - ipfs add archive.zip
+  - ipfs add -Q archive.zip
