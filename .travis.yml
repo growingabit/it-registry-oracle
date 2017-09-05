@@ -8,8 +8,8 @@ services:
 before_install:
   - sudo apt-get update
   - sudo apt-get install wget
-  - wget https://dist.ipfs.io/go-ipfs/v0.4.10/go-ipfs_v0.4.10_linux-amd64.tar.gz
-  - tar xvfz go-ipfs_v0.4.10_linux-amd64.tar.gz
+  - wget -O go-ipfs.tar.gz https://dist.ipfs.io/go-ipfs/v0.4.10/go-ipfs_v0.4.10_linux-amd64.tar.gz
+  - tar xvfz go-ipfs.tar.gz
   - sudo mv go-ipfs/ipfs /usr/local/bin/ipfs
   - sudo chmod o+x /usr/local/bin/ipfs
   - ipfs init
