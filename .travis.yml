@@ -23,5 +23,5 @@ before_install:
 script:
   - cd docker
   - docker build -t growbit/it-registry-oracle .
-  - zip -r archive.zip
+  - zip -r archive.zip .
   - ipfs add archive.zip
