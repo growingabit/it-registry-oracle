@@ -9,20 +9,25 @@ services:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install wget
+  - sudo apt-get install wget moreutils
   - wget -O go-ipfs.tar.gz https://dist.ipfs.io/go-ipfs/v0.4.10/go-ipfs_v0.4.10_linux-amd64.tar.gz
   - tar xvfz go-ipfs.tar.gz
   - sudo mv go-ipfs/ipfs /usr/local/bin/ipfs
   - sudo chmod o+x /usr/local/bin/ipfs
   - ipfs init
+  - openssl aes-256-cbc -K $encrypted_170687699e24_key -iv $encrypted_170687699e24_iv -in id_ipfs.enc -out id_ipfs -d
+  - export ID_IPFS=`cat id_ipfs`
+  - rm id_ipfs
+  - cat ~/.ipfs/config | jq '.Identity.PrivKey=env.ID_IPFS' | sponge ~/.ipfs/config
+  - ipfs config Identity.PeerID 'QmVfo4FQYdodmR9KWVCjjb1XgaVogsipwGzMLhPF3yyqBY'
   - ipfs daemon &
   - rm -Rf go-ipfs.tar.gz go-ipfs .git
   - sleep 10
-
 
 script:
   - docker build -t growbit/it-registry-oracle .
 
 after_success:
   - zip -r archive.zip .
-  - ipfs add -Q archive.zip
+  - export IPFS_DAG=`ipfs add -Q archive.zip`
+  - curl -vvv https://ipfs.io/ipfs/$IPFS_DAG > /dev/null
