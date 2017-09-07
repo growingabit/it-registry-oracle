@@ -1,0 +1,35 @@
+https://www.websequencediagrams.com/
+================================
+title request flow
+
+browser->user: ask credentials
+user->browser: input credentials
+browser->browser: generate id_rsa, entropy by user interaction
+browser->browser: encrypt credentials
+browser->pusher: open pusher channel
+browser->oraclize_computation:
+note left of browser
+{
+"sign?":hash(priv+credentials),
+"pubkey": id_rsa.pub
+"data": encrypted credentials,
+"pusher": pusher channel id
+}
+end note
+oraclize_computation->pusher: request id_rsa
+pusher->browser: push webrtc
+browser->oraclize_computation: send id_rsa
+oraclize_computation->oraclize_computation:
+note right of oraclize_computation
+verify id_rsa
+decrypt data
+verify sign?
+do stuff
+free all credential related values
+print to stdout privacy-aware data
+end note
+oraclize_computation->pusher: close channel
+browser->oraclize_computation: polling for proof
+browser->user: show proof
+browser->3rd: publish proof
+================================

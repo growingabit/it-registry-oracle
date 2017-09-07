@@ -12,3 +12,11 @@ https://api.oraclize.it/api/v1/query/8ec431ce20dbdab8b3d32e588f8c17d7189eedc2f57
 
 
 {"result": {"_timestamp": 1504653585, "id": "8ec431ce20dbdab8b3d32e588f8c17d7189eedc2f575872ce9b6bd72eb972d20", "daterange": [1504653585, 1504653645], "_lock": true, "actions": [], "interval": 3600, "version": 3, "_timestamp_creation": 1504653585, "active": true, "hidden": false, "payload": {"conditions": [{"query": "QmS4g2eyriLdF8fZC8bboDUoDkRNVcDoizySN9VnKhtpXF", "proof_type": 0, "check_op": "tautology", "datasource": "computation", "value": null}]}}, "success": true}
+
+
+NESTED
+
+[computation] ['QmRWuATBUHWjVYt233XXghEQWM3Lm8AuX2cmNHqLJz4XWF', 'Example of decrypted string', '${[decrypt] BOYnQstP700X10I+WWNUVVNZEmal+rZ0GD1CgcW5P5wUSFKr2QoIwHLvkHfQR5e4Bfakq0CIviJnjkfKFD+ZJzzxcaFUQITDZJxsRLtKuxvAuh6IccUJ+jDF/znTH+8x8EE1Tt9SY7RvqtVao2vxm4CxIWq1vk4=}', 'Hello there!']
+
+
+curl 'https://api.oraclize.it/api/v1/query/create' -H 'content-type: application/json' -H 'accept: application/json' --data-binary '{"datasource":"nested","query":"[computation] ['QmRWuATBUHWjVYt233XXghEQWM3Lm8AuX2cmNHqLJz4XWF', 'Example of decrypted string', '${[decrypt] BOYnQstP700X10I+WWNUVVNZEmal+rZ0GD1CgcW5P5wUSFKr2QoIwHLvkHfQR5e4Bfakq0CIviJnjkfKFD+ZJzzxcaFUQITDZJxsRLtKuxvAuh6IccUJ+jDF/znTH+8x8EE1Tt9SY7RvqtVao2vxm4CxIWq1vk4=}', 'Hello there!']", "proof_type": 17 }' | jq
