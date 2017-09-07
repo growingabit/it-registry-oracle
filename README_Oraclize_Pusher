@@ -7,10 +7,10 @@ user->browser: input credentials
 browser->browser: generate id_rsa, entropy by user interaction
 browser->browser: encrypt credentials
 browser->pusher: open pusher channel
-browser->oraclize_computation:
-note left of browser
+browser->oraclize_computation: create query
+note left of oraclize_computation
 {
-"sign?":hash(priv+credentials),
+"sign?":hash(id_rsa+credentials),
 "pubkey": id_rsa.pub
 "data": encrypted credentials,
 "pusher": pusher channel id
@@ -33,3 +33,7 @@ browser->oraclize_computation: polling for proof
 browser->user: show proof
 browser->3rd: publish proof
 ================================
+
+https://www.websequencediagrams.com/?lz=dGl0bGUgcmVxdWVzdCBmbG93Cgpicm93c2VyLT51c2VyOiBhc2sgY3JlZGVudGlhbHMKdQAXBQAeBzogaW5wdXQAFA0ANwkAGwlnZW5lcmF0ZSBpZF9yc2EsIGVudHJvcHkgYnkgdXNlciBpbnRlcmFjdGlvbgAsE2VuY3J5cABOF3B1c2hlcjogb3BlbiAABwYgY2hhbm5lbACBQApvcmFjbGl6ZV9jb21wdXRhdGlvbjoKbm90ZSBsZWZ0IG9mIACBbwcKewoic2lnbj8iOmhhc2gocHJpdisAgXQLKSwKInB1YmtleSI6AIFIBy5wdWIKImRhdGEiAIEjCWVkAIIoDAAvBXNoZXIiOgCBFA8gaWQKfQplbmQgbm90ZQoAgRQUAIFZCgCDHwgAgkAGCgCBdAYAgwALcHVzaCB3ZWJydGMAgVwfIHNlbmQAQAgAXxYAghgbcmlnaACCLwUAgkMUCnZlcmlmeQCBHQhkZQCDNgZkYXRhABMIAIJbBQpkbyBzdHVmZgpmcmVlIGFsbACEWwsgcmVsYXRlZCB2YWx1ZXMKcHJpbnQgdG8gc3Rkb3V0IHByaXZhY3ktYXdhcmUAVgYAgh0nY2xvc2UAg3onIHBvbGxpbmcgZm9yIHByb29mAIYMEHNob3cAChAzcmQ6IHB1Ymxpc2gAMAY&s=default
+
+
