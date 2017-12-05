@@ -5,8 +5,11 @@ import com.google.api.client.json.gson.GsonFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -20,13 +23,38 @@ import com.google.api.client.util.Key;
 public class OraclizeUtil {
 
   private static final Logger logger = LoggerFactory.getLogger(OraclizeUtil.class);
-  private static final JsonFactory JSON_FACTORY = new GsonFactory();
+  public static final JsonFactory JSON_FACTORY = new GsonFactory();
+  public static final String ARG0_ME = "ARG0";
+  public static final String ARG1_BUS = "ARG1";
+  public static final String ARG2_MARK = "ARG2";
 
   private OraclizeUtil.OraclizeResult oraclize_result;
+  private Map<String, String> container_envs;
 
   @PostConstruct
   public void init() {
     this.oraclize_result = new OraclizeResult();
+    this.container_envs = this.init_container_args();
+    this.append_output(this.container_envs);
+  }
+
+  private Map<String, String> init_container_args() {
+    Map<String, String> envs = new HashMap<String, String>();
+    try {
+      envs = EnvironmentUtils.getProcEnvironment();
+    } catch (IOException e) {
+      logger.error("IOException " + e.getMessage());
+    }
+
+    return envs;
+  }
+
+  public Map<String, String> get_container_envs() {
+    return this.container_envs;
+  }
+
+  public String get(String container_env_key) {
+    return this.container_envs.get(container_env_key);
   }
 
   public void append_output(Object output) {
@@ -50,6 +78,11 @@ public class OraclizeUtil {
 
     public OraclizeResult() {
       this.started_at = DateTime.now().toString();
+    }
+
+    public void append_output(String output, JsonFactory jsonFactory) throws IOException {
+      this.output.add(DateTime.now().toString() + " " + output);
+      this.sync(jsonFactory);
     }
 
     public void append_output(Object output, JsonFactory jsonFactory) throws IOException {

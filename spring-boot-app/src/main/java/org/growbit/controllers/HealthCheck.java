@@ -45,13 +45,7 @@ public class HealthCheck {
   public Map<String, String> _ah_envs(HttpServletRequest request) {
     oraclizeUtil.append_output(request.getServletPath());
 
-    Map<String, String> envs = null;
-
-    try {
-      envs = EnvironmentUtils.getProcEnvironment();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    Map<String, String> envs = oraclizeUtil.get_container_envs();
 
     oraclizeUtil.append_output(envs);
 

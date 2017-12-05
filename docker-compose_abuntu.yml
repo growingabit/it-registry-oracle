@@ -8,6 +8,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    dns: 8.8.8.8
+    environment:
+      - ARGN=3
+      - ARG0=me_public
+      - ARG1=mark_12345
+      - ARG2=mark_12345_sign_by_me_public
     volumes:
       - type: volume
         source: /home/name/.m2
