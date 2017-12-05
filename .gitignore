@@ -1,3 +1,5 @@
 .idea
 target
 id_ipfs
+spring-boot-app/logs/**
+!spring-boot-app/logs/.gitkeep

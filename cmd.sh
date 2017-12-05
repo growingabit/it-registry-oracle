@@ -13,3 +13,5 @@ curl -fsS --retry 10 http://localhost:8080/_ah/health
 
 echo -e "\n"
 curl -X POST -H "Accept: application/json" http://localhost:8080/_ah/envs
+
+cat /opt/spring-boot-app/logs/result.json | jq -c .
