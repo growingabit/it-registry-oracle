@@ -3,3 +3,7 @@ target
 id_ipfs
 spring-boot-app/logs/**
 !spring-boot-app/logs/.gitkeep
+secrets/**
+secrets/.gitkeep
+growbit-1154edf3284d.json
+secrets.zip
