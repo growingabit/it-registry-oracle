@@ -4,24 +4,20 @@ package org.growbit.controllers;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
-import com.google.api.gax.core.GoogleCredentialsProvider;
 import com.google.api.gax.rpc.ApiException;
-import com.google.auth.Credentials;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
 import com.google.pubsub.v1.TopicName;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.growbit.models.PubSubModel;
+import org.growbit.utils.GoogleAuth;
 import org.growbit.utils.OraclizeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,38 +27,24 @@ public class StartController {
 
   private static final Logger logger = LoggerFactory.getLogger(StartController.class);
 
-  private final Publisher publisher;
-  String topicId = "oraclize";
-  String projectId = "growbit-0";
+  private Publisher publisher;
+  private String topicId = "oraclize";
+  private String projectId = "growbit-0";
 
   @Autowired
   private OraclizeUtil oraclizeUtil;
 
-  public StartController() throws IOException {
-    List<String> scopes = Arrays.asList(
-        "https://www.googleapis.com/auth/cloud-platform",
-        "https://www.googleapis.com/auth/pubsub"
-    );
+  @Autowired
+  private GoogleAuth gauth;
 
-    ClassPathResource gcloud_json_key = new ClassPathResource("growbit-1154edf3284d.json");
+  public StartController() {
+  }
 
-    GoogleCredentials credentials = GoogleCredentials.fromStream(gcloud_json_key.getInputStream()).createScoped(scopes);
+  @PostConstruct
+  public void init() throws IOException {
+    TopicName topicName = TopicName.of(this.projectId, this.topicId);
 
-    GoogleCredentialsProvider google_credentials_provider = new GoogleCredentialsProvider() {
-      @Override
-      public Credentials getCredentials() throws IOException {
-        return credentials;
-      }
-
-      @Override
-      public List<String> getScopesToApply() {
-        return scopes;
-      }
-    };
-
-    TopicName topicName = TopicName.of(projectId, topicId);
-
-    Publisher p = Publisher.newBuilder(topicName).setCredentialsProvider(google_credentials_provider).build();
+    Publisher p = Publisher.newBuilder(topicName).setCredentialsProvider(this.gauth.get_google_credentials_provider()).build();
 
     this.publisher = p;
   }
@@ -113,9 +95,9 @@ public class StartController {
     });
 
     try {
-      this.publisher.shutdown();
+      future.get();
     } catch (Exception e) {
-      String error_message = "Exception on Publisher shutdown " + e.getMessage();
+      String error_message = e.getClass().getSimpleName() + " on future get" + e.getMessage();
       logger.error(error_message);
       oraclizeUtil.append_output(error_message);
     }

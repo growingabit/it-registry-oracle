@@ -22,3 +22,11 @@ services:
         source: ./spring-boot-app
         target: /opt/spring-boot-app
     command: /opt/cmd_abuntu.sh
+  frontend:
+    image: nginx
+    ports:
+      - '8181:80'
+    volumes:
+      - type: volume
+        source: ./js-static-app
+        target: /usr/share/nginx/html
