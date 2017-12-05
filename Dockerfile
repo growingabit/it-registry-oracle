@@ -35,16 +35,12 @@ RUN mvn -v
 
 ADD spring-boot-app /opt/spring-boot-app
 
-WORKDIR /opt/spring-boot-app
-
-RUN ./mvnw clean package
-
-RUN ls -la
-
 WORKDIR /opt
 
 ADD cmd.sh cmd.sh
-
 RUN chmod +x cmd.sh
+
+ADD cmd_abuntu.sh cmd_abuntu.sh
+RUN chmod +x cmd_abuntu.sh
 
 CMD /opt/cmd.sh

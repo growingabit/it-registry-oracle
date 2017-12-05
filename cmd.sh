@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cd /opt/spring-boot-app
+
+./mvnw package -DexcludeDevtools=true
+
 java -Xmx2048M -Dfile.encoding=UTF8 -jar /opt/spring-boot-app/target/it-registry-oracle-0.0.1.jar &
 
 sleep 10

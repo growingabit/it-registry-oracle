@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  oracle:
+    image: growbit_oracle
+    ports:
+      - '8080:8080' # spring boot hot reload & endpoint invocation
+      - '5005:5005' # jmx debugging
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: volume
+        source: /home/name/.m2
+        target: /root/.m2
+      - type: volume
+        source: ./spring-boot-app
+        target: /opt/spring-boot-app
+    command: /opt/cmd_abuntu.sh
