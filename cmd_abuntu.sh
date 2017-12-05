@@ -9,7 +9,7 @@ chown 1000:1000 -R /opt/spring-boot-app
 chown 1000:1000 -R /root/.m2
 
 # https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#using-boot-devtools-remote
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 \
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 \
      -Xmx2048M \
      -Dfile.encoding=UTF8 \
      -jar /opt/spring-boot-app/target/it-registry-oracle-0.0.1.jar \
